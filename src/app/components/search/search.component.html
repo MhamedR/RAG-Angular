@@ -1,0 +1,76 @@
+<div class="search-container">
+  <mat-card class="search-card">
+    <mat-card-header>
+      <mat-card-title>RAG Search</mat-card-title>
+      <mat-card-subtitle>Ask questions about your documents</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <div class="search-form">
+        <mat-form-field class="query-input">
+          <mat-label>Your Question</mat-label>
+          <input
+            matInput
+            [(ngModel)]="query"
+            placeholder="E.g., What are the main points in the document?"
+            [disabled]="isLoading">
+          <button
+            *ngIf="query"
+            matSuffix
+            mat-icon-button
+            aria-label="Clear"
+            (click)="clearSearch()"
+            [disabled]="isLoading">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="search()"
+          [disabled]="!query.trim() || isLoading">
+          <mat-icon>search</mat-icon>
+          Search
+        </button>
+      </div>
+
+      <div class="search-results" *ngIf="isLoading || response">
+        <div class="loading-container" *ngIf="isLoading">
+          <mat-spinner diameter="40"></mat-spinner>
+          <p>Searching documents...</p>
+        </div>
+
+        <div class="results-container" *ngIf="response && !isLoading">
+          <div class="answer-section">
+            <h3>Answer</h3>
+            <p class="answer-text">{{ response.answer }}</p>
+          </div>
+
+          <mat-divider></mat-divider>
+
+          <div class="sources-section" *ngIf="response.documents.length > 0">
+            <h3>Sources</h3>
+
+            <mat-accordion>
+              <mat-expansion-panel *ngFor="let source of response.documents; let i = index">
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    {{ source.document }}
+                  </mat-panel-title>
+                  <mat-panel-description>
+                    Relevance: {{ getRelevancePercentage(source.score) }}%
+                  </mat-panel-description>
+                </mat-expansion-panel-header>
+
+                <div class="source-content">
+                  {{ source.content }}
+                </div>
+              </mat-expansion-panel>
+            </mat-accordion>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

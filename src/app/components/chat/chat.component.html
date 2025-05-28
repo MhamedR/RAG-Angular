@@ -1,0 +1,67 @@
+<div class="chat-container">
+  <mat-card class="chat-card">
+    <mat-card-header>
+      <mat-card-title>Chat with RAG Assistant</mat-card-title>
+      <button mat-icon-button color="warn" (click)="clearChat()" aria-label="Clear chat">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-card-header>
+    
+    <mat-card-content>
+      <div class="messages-container" #messageContainer>
+        <div class="messages-list">
+          <ng-container *ngIf="messages.length === 0">
+            <div class="empty-chat">
+              <p>No messages yet. Start a conversation!</p>
+            </div>
+          </ng-container>
+          
+          <div 
+            *ngFor="let message of messages" 
+            class="message" 
+            [ngClass]="{'user-message': message.isUser, 'assistant-message': !message.isUser}">
+            
+            <div class="message-content">
+              <div *ngIf="!message.isLoading; else loadingTemplate">
+                {{ message.content }}
+              </div>
+              
+              <ng-template #loadingTemplate>
+                <div class="loading-container">
+                  <mat-spinner diameter="20"></mat-spinner>
+                  <span>Thinking...</span>
+                </div>
+              </ng-template>
+            </div>
+            
+            <div class="message-timestamp">
+              {{ message.timestamp | date:'short' }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+    
+    <mat-card-actions>
+      <form (ngSubmit)="sendMessage()" class="message-form">
+        <mat-form-field class="message-input">
+          <mat-label>Type a message</mat-label>
+          <input 
+            matInput 
+            [(ngModel)]="newMessage" 
+            name="newMessage" 
+            [disabled]="isLoading"
+            placeholder="Ask a question...">
+        </mat-form-field>
+        
+        <button 
+          mat-fab 
+          color="primary" 
+          type="submit"
+          [disabled]="!newMessage.trim() || isLoading">
+          <mat-icon>send</mat-icon>
+        </button>
+      </form>
+    </mat-card-actions>
+  </mat-card>
+</div> 

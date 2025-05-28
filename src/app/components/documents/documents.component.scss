@@ -1,0 +1,78 @@
+.documents-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.documents-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+mat-card-content {
+  flex: 1;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 16px;
+}
+
+.upload-section {
+  margin-bottom: 24px;
+}
+
+.upload-area {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 32px;
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  background-color: #fafafa;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    border-color: #673ab7;
+    background-color: #f0f0f0;
+  }
+}
+
+.upload-icon {
+  font-size: 48px;
+  height: 48px;
+  width: 48px;
+  color: #673ab7;
+  margin-bottom: 16px;
+}
+
+.documents-table-container {
+  overflow: auto;
+  width: 100%;
+}
+
+.documents-table {
+  width: 100%;
+}
+
+.status-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.empty-state {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 32px;
+  color: rgba(0, 0, 0, 0.54);
+}
+
+@media (max-width: 599px) {
+  .upload-area {
+    padding: 16px;
+  }
+} 

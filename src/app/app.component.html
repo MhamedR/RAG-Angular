@@ -1,0 +1,34 @@
+<mat-toolbar color="primary" class="toolbar">
+  <button mat-icon-button (click)="sidenav.toggle()" *ngIf="authService.isAuthenticated()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>RAG Assistant</span>
+  <span class="spacer"></span>
+  <button mat-button (click)="logout()" *ngIf="authService.isAuthenticated()">
+    <mat-icon>logout</mat-icon>
+    Logout
+  </button>
+</mat-toolbar>
+
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #sidenav mode="side" [opened]="authService.isAuthenticated()" [disableClose]="false" class="sidenav">
+    <mat-nav-list>
+      <a mat-list-item routerLink="/chat" routerLinkActive="active">
+        <mat-icon matListItemIcon>chat</mat-icon>
+        <span matListItemTitle>Chat</span>
+      </a>
+      <a mat-list-item routerLink="/documents" routerLinkActive="active">
+        <mat-icon matListItemIcon>upload_file</mat-icon>
+        <span matListItemTitle>Documents</span>
+      </a>
+      <a mat-list-item routerLink="/search" routerLinkActive="active">
+        <mat-icon matListItemIcon>search</mat-icon>
+        <span matListItemTitle>Search</span>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+  
+  <mat-sidenav-content class="content">
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container> 

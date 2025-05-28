@@ -1,0 +1,38 @@
+// Custom Theming for Angular Material
+@use '@angular/material' as mat;
+
+html, body { 
+  height: 100%; 
+  margin: 0; 
+  font-family: Roboto, "Helvetica Neue", sans-serif; 
+}
+
+/* Snackbar Styles */
+.success-snackbar {
+  --mdc-snackbar-container-color: #43a047;
+  --mdc-snackbar-supporting-text-color: white;
+  --mat-mdc-snack-bar-button-color: white;
+}
+
+.error-snackbar {
+  --mdc-snackbar-container-color: #d32f2f;
+  --mdc-snackbar-supporting-text-color: white;
+  --mat-mdc-snack-bar-button-color: white;
+}
+
+.info-snackbar {
+  --mdc-snackbar-container-color: #1976d2;
+  --mdc-snackbar-supporting-text-color: white;
+  --mat-mdc-snack-bar-button-color: white;
+}
+
+/* Responsive adjustments */
+@media (max-width: 599px) {
+  .mat-toolbar {
+    padding: 0 8px;
+  }
+  
+  .content {
+    padding: 8px;
+  }
+} 
