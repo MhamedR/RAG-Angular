@@ -58,6 +58,7 @@ mat-card-content {
 .message-content {
   word-wrap: break-word;
   white-space: pre-line;
+  color: #000;
 }
 
 .message-timestamp {
@@ -100,4 +101,4 @@ mat-card-actions {
   .message {
     max-width: 90%;
   }
-} 
+}
